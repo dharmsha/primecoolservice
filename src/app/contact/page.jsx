@@ -1,347 +1,378 @@
+"use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 
-const PHONE = "9179886 28102";
-const PHONE_DISPLAY = "79886 28102 / 7992206530";
+// =====================================================
+// MY BILLING POINT - CONTACT PAGE
+// Modern UI with Framer Motion Animations
+// =====================================================
+
+const PHONE = "917988628102";
+const PHONE_DISPLAY = "+91 79886 28102";
 
 function WhatsAppLink() {
   const message = encodeURIComponent(
-    "Hello Prime Cool Service! I want to enquire about your AC service."
+    "Hello My Billing Point! I want to enquire about your billing software."
   );
-
-  return "https://wa.me/" + PHONE + "?text=" + message;
+  return `https://wa.me/${PHONE}?text=${message}`;
 }
 
 const CONTACT_INFO = [
   {
-    title: "Call Us",
+    title: "Call Us Directly",
     value: PHONE_DISPLAY,
-    description: "Call us for service enquiries",
-    href: "tel:+9179886 28102",
+    description: "Mon-Sat (10 AM to 8 PM) ke beech call karein",
+    href: `tel:+${PHONE}`,
+    icon: "📞",
+    color: "from-emerald-400 to-teal-500",
   },
   {
-    title: "WhatsApp",
+    title: "WhatsApp Support",
     value: "Chat With Us",
-    description: "Get quick service assistance",
+    description: "Turant demo ya support ke liye message karein",
     href: WhatsAppLink(),
+    icon: "💬",
+    color: "from-green-400 to-emerald-600",
   },
   {
-    title: "Service Area",
-    value: "Patna & Nearby Areas",
-    description: "Home, office & business AC service",
-    href: null,
+    title: "Visit Our Office",
+    value: "Patna, Bihar",
+    description: "Kumrahar, Near Bapu Sabhagar",
+    href: "https://www.google.com/maps/search/?api=1&query=Kumrahar+Patna+Bapu+Sabhagar",
+    icon: "📍",
+    color: "from-indigo-400 to-purple-500",
   },
 ];
 
+// Animation Variants (JSX ke liye : any hata diya hai)
+// Animation Variants
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 },
+  },
+};
+
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900">
-      {/* Hero */}
-      <section className="border-b border-slate-200 bg-white">
-        <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:py-20">
-          <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-block rounded-full bg-cyan-50 px-4 py-2 text-sm font-bold text-cyan-700">
-              Contact Prime Cool Service
-            </span>
+    <main className="min-h-screen bg-[#f7faff] text-slate-900 overflow-hidden">
+      {/* Background Decoration */}
+      <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
+        <div className="absolute -top-32 -left-32 w-96 h-96 bg-emerald-300/20 rounded-full blur-3xl" />
+        <div className="absolute top-[35%] -right-40 w-[30rem] h-[30rem] bg-indigo-300/20 rounded-full blur-3xl" />
+      </div>
 
-            <h1 className="mt-5 text-4xl font-black leading-tight sm:text-5xl">
-              Get in Touch With
-              <span className="block text-cyan-600">
-                Prime Cool Service
+      {/* =====================================================
+          HERO SECTION
+      ===================================================== */}
+      <section className="relative pt-24 pb-12 px-4 sm:px-6 lg:pt-32 border-b border-slate-200/60">
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+            className="mx-auto max-w-3xl text-center"
+          >
+            <motion.span
+              variants={fadeUp}
+              className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-bold text-emerald-700 shadow-sm"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
               </span>
-            </h1>
+              Contact My Billing Point
+            </motion.span>
 
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
-              Need AC installation, repair, servicing or maintenance?
-              Contact us and our team will help you with the right service.
-            </p>
-          </div>
+            <motion.h1
+              variants={fadeUp}
+              className="mt-6 text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl"
+            >
+              Let&apos;s Talk About Your{" "}
+              <span className="bg-gradient-to-r from-emerald-600 to-indigo-600 bg-clip-text text-transparent">
+                Business
+              </span>
+            </motion.h1>
+
+            <motion.p
+              variants={fadeUp}
+              className="mx-auto mt-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg"
+            >
+              Billing, Stock management, ya GST invoice — kisi bhi sawaal ke liye
+              humse sampark karein. Hamari team aapki poori madad karegi.
+            </motion.p>
+          </motion.div>
         </div>
       </section>
 
-      {/* Contact Information */}
-      <section className="bg-slate-50">
-        <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:py-20">
-          <div className="grid gap-5 md:grid-cols-3">
-            {CONTACT_INFO.map((item) => {
-              const CardContent = (
-                <>
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-50 text-sm font-black text-cyan-600">
-                    {item.title === "Call Us"
-                      ? "01"
-                      : item.title === "WhatsApp"
-                      ? "02"
-                      : "03"}
-                  </div>
-
-                  <h2 className="mt-5 text-xl font-bold text-slate-900">
-                    {item.title}
-                  </h2>
-
-                  <p className="mt-2 font-semibold text-cyan-600">
-                    {item.value}
-                  </p>
-
-                  <p className="mt-2 text-sm leading-6 text-slate-500">
-                    {item.description}
-                  </p>
-                </>
-              );
-
-              if (item.href) {
-                return (
-                  <a
-                    key={item.title}
-                    href={item.href}
-                    target={
-                      item.title === "WhatsApp" ? "_blank" : undefined
-                    }
-                    rel={
-                      item.title === "WhatsApp"
-                        ? "noopener noreferrer"
-                        : undefined
-                    }
-                    className="rounded-2xl border border-slate-200 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:border-cyan-300 hover:shadow-lg"
-                  >
-                    {CardContent}
-                  </a>
-                );
-              }
-
-              return (
-                <div
-                  key={item.title}
-                  className="rounded-2xl border border-slate-200 bg-white p-6"
-                >
-                  {CardContent}
+      {/* =====================================================
+          CONTACT CARDS
+      ===================================================== */}
+      <section className="relative -mt-8 z-10 px-4 sm:px-6">
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+            className="grid gap-6 md:grid-cols-3"
+          >
+            {CONTACT_INFO.map((item, index) => (
+              <motion.a
+                key={item.title}
+                variants={fadeUp}
+                whileHover={{ y: -8, scale: 1.02 }}
+                href={item.href}
+                target={item.title === "WhatsApp Support" || item.title === "Visit Our Office" ? "_blank" : undefined}
+                rel={item.title === "WhatsApp Support" || item.title === "Visit Our Office" ? "noopener noreferrer" : undefined}
+                className="group relative rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all hover:shadow-xl hover:shadow-emerald-500/10"
+              >
+                <div className={`inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${item.color} text-2xl text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                  {item.icon}
                 </div>
-              );
-            })}
-          </div>
+                <h2 className="mt-6 text-xl font-black text-slate-900">
+                  {item.title}
+                </h2>
+                <p className="mt-2 font-bold text-emerald-600">
+                  {item.value}
+                </p>
+                <p className="mt-2 text-sm leading-6 text-slate-500">
+                  {item.description}
+                </p>
+                
+                {/* Hover Arrow */}
+                <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
+                    →
+                  </span>
+                </div>
+              </motion.a>
+            ))}
+          </motion.div>
         </div>
       </section>
 
-      {/* Contact Form + WhatsApp */}
-      <section className="bg-white">
-        <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:py-20">
-          <div className="grid gap-10 lg:grid-cols-2">
-            {/* Left */}
-            <div>
-              <p className="text-sm font-bold uppercase tracking-wider text-cyan-600">
-                Send Enquiry
-              </p>
+      {/* =====================================================
+          FORM + INFO SECTION
+      ===================================================== */}
+      <section className="px-4 py-20 sm:px-6">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-20 items-start">
+            
+            {/* Left Side - Info & Features */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+              className="max-w-xl"
+            >
+              <motion.div variants={fadeUp}>
+                <span className="text-sm font-black uppercase tracking-widest text-emerald-600">
+                  Send Enquiry
+                </span>
+                <h2 className="mt-3 text-3xl font-black text-slate-900 sm:text-4xl">
+                  Hum Kaise Madad <br/> Kar Sakte Hain?
+                </h2>
+                <p className="mt-4 text-base leading-8 text-slate-600">
+                  Apni details fill karein ya direct WhatsApp par sampark karein. Humari team aapko software ka demo dene ke liye taiyar hai.
+                </p>
+              </motion.div>
 
-              <h2 className="mt-3 text-3xl font-black text-slate-900 sm:text-4xl">
-                Tell Us What You Need
-              </h2>
-
-              <p className="mt-4 max-w-xl text-base leading-8 text-slate-600">
-                Fill in your details and service requirement. You can also
-                directly contact us on WhatsApp for faster assistance.
-              </p>
-
-              <div className="mt-8 rounded-2xl bg-slate-50 p-6">
-                <h3 className="text-xl font-bold text-slate-900">
-                  Available Services
+              <motion.div variants={fadeUp} className="mt-10 rounded-3xl bg-white p-8 border border-slate-200 shadow-sm">
+                <h3 className="text-lg font-black text-slate-900">
+                  Software Features
                 </h3>
-
-                <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                <div className="mt-6 grid gap-4 sm:grid-cols-2">
                   {[
-                    "AC Installation",
-                    "AC Repair",
-                    "AC Servicing",
-                    "Gas Charging",
-                    "AC Maintenance",
-                    "Compressor Repair",
-                  ].map((service) => (
-                    <div
-                      key={service}
-                      className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700"
-                    >
-                      <span className="mr-2 text-cyan-600">✓</span>
-                      {service}
+                    "GST Billing",
+                    "Stock Management",
+                    "Low Stock Alerts",
+                    "Sales Reports",
+                    "Multi-User Access",
+                    "WhatsApp Sharing",
+                  ].map((feature) => (
+                    <div key={feature} className="flex items-center gap-3 text-sm font-semibold text-slate-700">
+                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 text-xs">✓</span>
+                      {feature}
                     </div>
                   ))}
                 </div>
+              </motion.div>
+            </motion.div>
 
-                <a
-                  href={WhatsAppLink()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-7 inline-flex w-full items-center justify-center rounded-xl bg-cyan-600 px-6 py-3.5 text-sm font-bold text-white transition hover:bg-cyan-700 sm:w-auto"
-                >
-                  Chat on WhatsApp
-                </a>
-              </div>
-            </div>
-
-            {/* Right Form */}
-            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+            {/* Right Side - Form */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, type: "spring", stiffness: 50 }}
+              className="relative rounded-[2rem] border border-slate-200 bg-white p-6 shadow-2xl shadow-slate-200/50 sm:p-10"
+            >
+              {/* Glow behind form */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-emerald-400 to-indigo-400 rounded-[2rem] blur opacity-10 pointer-events-none" />
+              
               <h2 className="text-2xl font-black text-slate-900">
-                Service Enquiry
+                Book a Free Demo
               </h2>
-
               <p className="mt-2 text-sm text-slate-500">
-                Enter your details and we will contact you.
+                Details bharein, hum aapse turant sampark karenge.
               </p>
 
               <form
                 action={WhatsAppLink()}
                 method="get"
                 target="_blank"
-                className="mt-7 space-y-5"
+                className="mt-8 space-y-5 relative z-10"
               >
                 <div>
-                  <label
-                    htmlFor="name"
-                    className="mb-2 block text-sm font-bold text-slate-700"
-                  >
-                    Your Name
+                  <label htmlFor="name" className="mb-2 block text-sm font-bold text-slate-700">
+                    Aapka Naam
                   </label>
-
                   <input
                     id="name"
                     name="name"
                     type="text"
                     placeholder="Enter your name"
                     required
-                    className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100"
+                    className="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3.5 text-sm outline-none transition focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-500/10"
                   />
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="phone"
-                    className="mb-2 block text-sm font-bold text-slate-700"
-                  >
+                  <label htmlFor="phone" className="mb-2 block text-sm font-bold text-slate-700">
                     Mobile Number
                   </label>
-
                   <input
                     id="phone"
                     name="phone"
                     type="tel"
                     placeholder="Enter mobile number"
                     required
-                    className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100"
+                    className="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3.5 text-sm outline-none transition focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-500/10"
                   />
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="service"
-                    className="mb-2 block text-sm font-bold text-slate-700"
-                  >
-                    Select Service
+                  <label htmlFor="business" className="mb-2 block text-sm font-bold text-slate-700">
+                    Business Type
                   </label>
-
                   <select
-                    id="service"
-                    name="service"
+                    id="business"
+                    name="business"
                     required
-                    className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-700 outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100"
+                    className="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3.5 text-sm text-slate-700 outline-none transition focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-500/10"
                   >
-                    <option value="">Select a service</option>
-                    <option>AC Installation</option>
-                    <option>AC Repair</option>
-                    <option>AC Servicing</option>
-                    <option>Gas Charging</option>
-                    <option>AC Maintenance</option>
-                    <option>Compressor Repair</option>
+                    <option value="">Select business type</option>
+                    <option>Retail / Kirana Store</option>
+                    <option>Medical / Pharmacy</option>
+                    <option>Electronics / Hardware</option>
+                    <option>Garments / Boutique</option>
+                    <option>Restaurant / Cafe</option>
+                    <option>Other</option>
                   </select>
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="message"
-                    className="mb-2 block text-sm font-bold text-slate-700"
-                  >
-                    Message
+                  <label htmlFor="message" className="mb-2 block text-sm font-bold text-slate-700">
+                    Message (Optional)
                   </label>
-
                   <textarea
                     id="message"
                     name="message"
-                    rows="4"
-                    placeholder="Tell us about your AC problem..."
-                    className="w-full resize-none rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100"
+                    rows="3"
+                    placeholder="Apni requirement batayein..."
+                    className="w-full resize-none rounded-xl border border-slate-300 bg-slate-50 px-4 py-3.5 text-sm outline-none transition focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-500/10"
                   ></textarea>
                 </div>
 
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   type="submit"
-                  className="w-full rounded-xl bg-cyan-600 px-6 py-3.5 text-sm font-bold text-white transition hover:bg-cyan-700"
+                  className="w-full rounded-xl bg-slate-900 px-6 py-4 text-sm font-bold text-white shadow-lg transition hover:bg-slate-800"
                 >
-                  Send Enquiry on WhatsApp
-                </button>
+                  Send Enquiry via WhatsApp
+                </motion.button>
               </form>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-slate-50">
-        <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:py-20">
-          <div className="rounded-3xl bg-gradient-to-r from-cyan-600 to-blue-700 px-6 py-10 text-center text-white sm:px-10">
-            <h2 className="text-3xl font-black sm:text-4xl">
-              Need AC Service Today?
-            </h2>
+      {/* =====================================================
+          CTA BANNER
+      ===================================================== */}
+      <section className="px-4 pb-20 sm:px-6">
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="relative overflow-hidden rounded-[2.5rem] bg-slate-900 px-6 py-16 text-center text-white sm:px-12"
+          >
+            {/* Animated Background Blobs */}
+            <motion.div 
+              animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }} 
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/30 blur-[100px] rounded-full pointer-events-none" 
+            />
+            <motion.div 
+              animate={{ scale: [1, 1.5, 1], opacity: [0.2, 0.4, 0.2] }} 
+              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-500/30 blur-[100px] rounded-full pointer-events-none" 
+            />
 
-            <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-cyan-50 sm:text-base">
-              Get in touch with Prime Cool Service for reliable AC
-              installation, repair and maintenance support.
-            </p>
+            <div className="relative z-10">
+              <h2 className="text-3xl font-black sm:text-4xl lg:text-5xl">
+                Ready to upgrade your business?
+              </h2>
+              <p className="mx-auto mt-4 max-w-2xl text-slate-300 sm:text-lg">
+                Aaj hi free demo book karein aur apne business ko digital banayein. No credit card required.
+              </p>
 
-            <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
-              <a
-                href={WhatsAppLink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-xl bg-white px-7 py-3.5 text-sm font-bold text-cyan-700 transition hover:bg-cyan-50"
-              >
-                WhatsApp Us
-              </a>
+              <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  href={WhatsAppLink()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-500 px-8 py-4 text-sm font-bold text-white transition hover:bg-emerald-400"
+                >
+                  💬 WhatsApp par Demo Lein
+                </motion.a>
 
-              <a
-                href="tel:+9179886 28102"
-                className="rounded-xl border border-white/40 bg-white/10 px-7 py-3.5 text-sm font-bold text-white transition hover:bg-white/20"
-              >
-                Call Now
-              </a>
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  href={`tel:+${PHONE}`}
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-8 py-4 text-sm font-bold text-white backdrop-blur-md transition hover:bg-white/20"
+                >
+                  📞 {PHONE_DISPLAY}
+                </motion.a>
+              </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Bottom Navigation */}
+      {/* Bottom Nav */}
       <section className="border-t border-slate-200 bg-white">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-5 py-6 text-sm sm:flex-row sm:px-8">
-          <p className="text-slate-500">
-            Need more information?
-          </p>
-
+          <p className="text-slate-500">Need more information?</p>
           <div className="flex gap-5">
-            <Link
-              href="/about"
-              className="font-semibold text-slate-600 transition hover:text-cyan-600"
-            >
-              About Us
-            </Link>
-
-            <Link
-              href="/services"
-              className="font-semibold text-slate-600 transition hover:text-cyan-600"
-            >
-              Services
-            </Link>
-
-            <Link
-              href="/"
-              className="font-semibold text-slate-600 transition hover:text-cyan-600"
-            >
-              Home
-            </Link>
+            <Link href="/about" className="font-semibold text-slate-600 transition hover:text-emerald-600">About Us</Link>
+            <Link href="/services" className="font-semibold text-slate-600 transition hover:text-emerald-600">Features</Link>
+            <Link href="/" className="font-semibold text-slate-600 transition hover:text-emerald-600">Home</Link>
           </div>
         </div>
       </section>

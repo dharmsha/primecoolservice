@@ -1,6 +1,49 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+
+// =====================================================
+// TYPEWRITER COMPONENT
+// =====================================================
+function Typewriter() {
+  const words = ["Hamara System", "Smart Billing", "Easy Stock", "GST Invoice"];
+  const [index, setIndex] = useState(0);
+  const [subIndex, setSubIndex] = useState(0);
+  const [reverse, setReverse] = useState(false);
+
+  useEffect(() => {
+    if (subIndex === words[index].length + 1 && !reverse) {
+      const timeout = setTimeout(() => setReverse(true), 2000);
+      return () => clearTimeout(timeout);
+    }
+
+    if (subIndex === 0 && reverse) {
+      setReverse(false);
+      setIndex((prev) => (prev + 1) % words.length);
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      setSubIndex((prev) => prev + (reverse ? -1 : 1));
+    }, Math.max(reverse ? 75 : subIndex === words[index].length ? 1000 : 150, parseInt("100")));
+
+    return () => clearTimeout(timeout);
+  }, [subIndex, index, reverse, words]);
+
+  return (
+    <span className="inline-block min-h-[1.2em]">
+      <span className="bg-gradient-to-r from-emerald-300 via-teal-400 to-indigo-500 bg-clip-text text-transparent">
+        {words[index].substring(0, subIndex)}
+      </span>
+      <motion.span
+        animate={{ opacity: [1, 0] }}
+        transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+        className="inline-block w-[3px] h-[1em] bg-emerald-400 ml-1 translate-y-1"
+      />
+    </span>
+  );
+}
 
 /* ---------- Floating Bubbles Background ---------- */
 function Bubbles() {
@@ -108,35 +151,34 @@ function Counter({ to, prefix = "", suffix = "", duration = 1500 }) {
   );
 }
 
+// Framer Motion Variants
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
+};
+
 export default function Hero() {
   return (
     <div className="relative overflow-hidden bg-[#020817] text-white">
       {/* Custom keyframes */}
       <style jsx>{`
         @keyframes bubble-rise {
-          0% {
-            transform: translateY(100vh) scale(0.6);
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            opacity: 0.8;
-          }
-          100% {
-            transform: translateY(-10vh) scale(1.1);
-            opacity: 0;
-          }
+          0% { transform: translateY(100vh) scale(0.6); opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 0.8; }
+          100% { transform: translateY(-10vh) scale(1.1); opacity: 0; }
         }
         .bubble-rise {
           animation: bubble-rise linear infinite;
           bottom: -40px;
         }
         @keyframes barGrow {
-          from {
-            width: 0%;
-          }
+          from { width: 0%; }
         }
       `}</style>
 
@@ -157,10 +199,16 @@ export default function Hero() {
         <div className="absolute right-[12%] top-[25%] h-2 w-2 animate-pulse rounded-full bg-indigo-400" />
 
         <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-14 px-6 py-16 lg:grid-cols-2 lg:px-8">
+          
           {/* ========== LEFT ========== */}
-          <div className="animate-[heroText_1s_ease-out_both]">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+            className="max-w-2xl"
+          >
             {/* Badge */}
-            <div className="mb-7 inline-flex items-center gap-3 rounded-full border border-emerald-400/25 bg-emerald-400/10 px-5 py-2.5 backdrop-blur-xl">
+            <motion.div variants={fadeUp} className="mb-7 inline-flex items-center gap-3 rounded-full border border-emerald-400/25 bg-emerald-400/10 px-5 py-2.5 backdrop-blur-xl">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="absolute h-full w-full animate-ping rounded-full bg-emerald-400" />
                 <span className="relative h-2.5 w-2.5 rounded-full bg-emerald-400" />
@@ -168,28 +216,26 @@ export default function Hero() {
               <span className="text-sm font-semibold text-emerald-300">
                 India ka Smart Billing & Stock Software
               </span>
-            </div>
+            </motion.div>
 
-            {/* Heading */}
-            <h1 className="text-5xl font-black leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+            {/* Heading with Typewriter */}
+            <motion.h1 variants={fadeUp} className="text-5xl font-black leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
               Aapka Business,
               <br />
-              <span className="relative inline-block bg-gradient-to-r from-emerald-300 via-teal-400 to-indigo-500 bg-clip-text text-transparent">
-                Hamara System
-              </span>
-            </h1>
+              <Typewriter />
+            </motion.h1>
 
-            <div className="mt-5 h-1 w-28 animate-[lineGrow_1.2s_ease-out_both] rounded-full bg-gradient-to-r from-emerald-400 to-indigo-500" />
+            <motion.div variants={fadeUp} className="mt-5 h-1 w-28 rounded-full bg-gradient-to-r from-emerald-400 to-indigo-500" />
 
             {/* Description */}
-            <p className="mt-7 max-w-xl text-base leading-8 text-slate-300 sm:text-lg">
+            <motion.p variants={fadeUp} className="mt-7 max-w-xl text-base leading-8 text-slate-300 sm:text-lg">
               <span className="font-bold text-emerald-300">My Billing Point</span>{" "}
               ke saath manage karo apna stock, billing, GST invoice aur
               stock-out alerts — sab kuch ek hi jagah, fast aur secure.
-            </p>
+            </motion.p>
 
             {/* Feature Pills */}
-            <div className="mt-7 flex flex-wrap gap-2.5">
+            <motion.div variants={fadeUp} className="mt-7 flex flex-wrap gap-2.5">
               {[
                 "📦 Stock Manage",
                 "🧾 Bill / Invoice",
@@ -200,16 +246,15 @@ export default function Hero() {
               ].map((item, index) => (
                 <span
                   key={item}
-                  className="animate-[pillUp_.7s_ease-out_both] rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-xs font-semibold text-slate-300 backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-emerald-400/40 hover:text-emerald-300"
-                  style={{ animationDelay: `${index * 100}ms` }}
+                  className="rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-xs font-semibold text-slate-300 backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-emerald-400/40 hover:text-emerald-300"
                 >
                   {item}
                 </span>
               ))}
-            </div>
+            </motion.div>
 
             {/* Buttons */}
-            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+            <motion.div variants={fadeUp} className="mt-9 flex flex-col gap-4 sm:flex-row">
               <a
                 href="/signup"
                 className="group relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-400 to-indigo-600 px-8 py-4 text-center font-black text-slate-950 shadow-[0_15px_40px_rgba(52,211,153,.18)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(52,211,153,.3)]"
@@ -224,10 +269,10 @@ export default function Hero() {
               >
                 Saare Features Dekhein →
               </a>
-            </div>
+            </motion.div>
 
             {/* Trust Stats with Counters */}
-            <div className="mt-10 grid max-w-xl grid-cols-3 border-t border-white/10 pt-7">
+            <motion.div variants={fadeUp} className="mt-10 grid max-w-xl grid-cols-3 border-t border-white/10 pt-7">
               <div>
                 <h3 className="text-2xl font-black text-emerald-400">
                   <Counter to={500} suffix="+" />
@@ -246,11 +291,16 @@ export default function Hero() {
                 </h3>
                 <p className="mt-1 text-xs text-slate-500">Uptime</p>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* ========== RIGHT — LIVE DASHBOARD ========== */}
-          <div className="relative flex animate-[imageReveal_1.2s_ease-out_both] items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative flex items-center justify-center w-full"
+          >
             <div className="absolute h-[75%] w-[75%] animate-pulse rounded-full bg-emerald-400/15 blur-[100px]" />
             <div className="absolute h-[90%] w-[90%] animate-[spin_25s_linear_infinite] rounded-full border border-dashed border-emerald-400/10" />
 
@@ -358,7 +408,7 @@ export default function Hero() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>
