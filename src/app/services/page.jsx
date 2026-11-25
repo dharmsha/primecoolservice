@@ -8,8 +8,8 @@ import { useMemo, useState } from "react";
 // =====================================================
 
 // 📞 Business Numbers
-const PHONE = "918527378513";
-const PHONE_DISPLAY = "8527378513 / 7992206530";
+const PHONE = "9179886 28102";
+const PHONE_DISPLAY = "79886 28102 / 7992206530";
 
 // 🏢 Business Location
 const BUSINESS_LOCATION = {

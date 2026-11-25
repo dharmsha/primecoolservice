@@ -40,7 +40,7 @@ export default function Navbar() {
             <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-indigo-500 to-pink-500 blur-lg opacity-50 group-hover:opacity-80 transition-opacity -z-10" />
           </div>
           <span className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-pink-600 bg-clip-text text-transparent">
-            ServiceHub
+            My BillingPoint
           </span>
         </Link>
 

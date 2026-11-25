@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 
 const SITE_URL = "https://primecoolservice.com";
 const SITE_NAME = "Prime Cool Service";
-const PHONE = "+91-8527378513";
+const PHONE = "+91-79886 28102";
 const PHONE_2 = "+91-7992206530";
 
 export const viewport: Viewport = {
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     template: "%s | Prime Cool Service",
   },
   description:
-    "Prime Cool Service — All brand AC, Fridge, Washing Machine, RO, Geyser, Microwave & Kitchen Chimney Service, Installation & Repairing. Experienced technicians, genuine spare parts, doorstep service. हर सर्विस गारंटी के साथ. Call 8527378513.",
+    "Prime Cool Service — All brand AC, Fridge, Washing Machine, RO, Geyser, Microwave & Kitchen Chimney Service, Installation & Repairing. Experienced technicians, genuine spare parts, doorstep service. हर सर्विस गारंटी के साथ. Call 79886 28102.",
 
   keywords: [
     "AC service",
@@ -122,7 +122,7 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: "Prime Cool Service | AC, Fridge & Appliance Repair Experts",
     description:
-      "All brand AC, Fridge, Washing Machine, RO, Geyser, Microwave & Chimney Service with guarantee. Book now on WhatsApp — 8527378513.",
+      "All brand AC, Fridge, Washing Machine, RO, Geyser, Microwave & Chimney Service with guarantee. Book now on WhatsApp — 79886 28102.",
     images: [
       {
         url: "/og-image.jpg",
@@ -139,7 +139,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Prime Cool Service | AC, Fridge & Appliance Repair Experts",
     description:
-      "All brand AC, Fridge, Washing Machine, RO, Geyser, Microwave & Chimney Service with guarantee. Call 8527378513.",
+      "All brand AC, Fridge, Washing Machine, RO, Geyser, Microwave & Chimney Service with guarantee. Call 79886 28102.",
     images: ["/twitter-image.jpg"],
     creator: "@primecoolservice",
     site: "@primecoolservice",
@@ -299,7 +299,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 function WhatsAppFloat() {
   return (
     <a
-      href="https://wa.me/918527378513?text=Hi%20Prime%20Cool%20Service%2C%20mujhe%20appliance%20service%20chahiye."
+      href="https://wa.me/9179886 28102?text=Hi%20Prime%20Cool%20Service%2C%20mujhe%20appliance%20service%20chahiye."
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"

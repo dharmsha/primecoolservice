@@ -1,8 +1,8 @@
 
 import Link from "next/link";
 
-const PHONE = "918527378513";
-const PHONE_DISPLAY = "8527378513 / 7992206530";
+const PHONE = "9179886 28102";
+const PHONE_DISPLAY = "79886 28102 / 7992206530";
 
 function WhatsAppLink() {
   const message = encodeURIComponent(
@@ -17,7 +17,7 @@ const CONTACT_INFO = [
     title: "Call Us",
     value: PHONE_DISPLAY,
     description: "Call us for service enquiries",
-    href: "tel:+918527378513",
+    href: "tel:+9179886 28102",
   },
   {
     title: "WhatsApp",
@@ -304,7 +304,7 @@ export default function ContactPage() {
               </a>
 
               <a
-                href="tel:+918527378513"
+                href="tel:+9179886 28102"
                 className="rounded-xl border border-white/40 bg-white/10 px-7 py-3.5 text-sm font-bold text-white transition hover:bg-white/20"
               >
                 Call Now

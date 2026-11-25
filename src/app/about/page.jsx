@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const PHONE = "918527378513";
+const PHONE = "9179886 28102";
 
 function WhatsAppLink() {
   const message = encodeURIComponent(
